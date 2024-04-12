@@ -7,38 +7,30 @@ public class DirectoryExplorer {
 
     private FileHandler fileHandler;
 
-    public DirectoryExplorer (FileHandler fileHandler){
-        this.fileHandler=fileHandler;
+    public DirectoryExplorer(FileHandler fileHandler) {
+        this.fileHandler = fileHandler;
     }
-
 
     FileFilter fileFilter = new FileFilter() {
         @Override
         public boolean accept(File pathname) {
-
             return pathname.toString().endsWith(".java");
-
         }
     };
 
-    public void explore(File file){
-
-        if(file.isDirectory()){
-            for(File f : file.listFiles(fileFilter)){
+    public void explore(File file) {
+        if (file.isDirectory()) {
+            for (File f : file.listFiles(fileFilter)) {
                 explore(f);
             }
-            for(File f:file.listFiles()){
-                if(f.isDirectory()){
+            for (File f : file.listFiles()) {
+                if (f.isDirectory()) {
                     explore(f);
                 }
             }
-        }
-        else{
+        } else {
 
             fileHandler.handle(file);
         }
-
-
     }
-
 }

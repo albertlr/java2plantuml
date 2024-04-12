@@ -8,17 +8,15 @@ public class InterfaceVisitor extends VoidVisitorAdapter<Void> {
 
     private Translator translator;
 
-    public InterfaceVisitor(Translator translator){
-        this.translator=translator;
+    public InterfaceVisitor(Translator translator) {
+        this.translator = translator;
     }
 
     @Override
     public void visit(ClassOrInterfaceDeclaration n, Void arg) {
-
-        if(n.isInterface()) {
+        if (n.isInterface()) {
             this.translator.addInterface(n);
         }
         super.visit(n, arg);
-
     }
 }

@@ -13,7 +13,8 @@ public class ClassDiagramConfig {
     private boolean showColoredAccessSpecifiers;
 
     //private constructor, use builder only
-    private ClassDiagramConfig(){};
+    private ClassDiagramConfig() {
+    }
 
     public List<VoidVisitorAdapter<Void>> getVisitorAdapters() {
         return visitorAdapters;
@@ -48,38 +49,37 @@ public class ClassDiagramConfig {
     }
 
     //builder
-    public static class Builder implements UmlConfigBuilder{
-
+    public static class Builder implements UmlConfigBuilder {
         //default values for attributes
-        private List<VoidVisitorAdapter<Void>> visitorAdapters=new ArrayList<>();
-        private boolean showMethods=true;
-        private boolean showAttributes=true;
-        private boolean showColoredAccessSpecifiers=false;
+        private List<VoidVisitorAdapter<Void>> visitorAdapters = new ArrayList<>();
+        private boolean showMethods = true;
+        private boolean showAttributes = true;
+        private boolean showColoredAccessSpecifiers = false;
 
-        public Builder withVisitor(VoidVisitorAdapter<Void> visitor){
+        public Builder withVisitor(VoidVisitorAdapter<Void> visitor) {
             visitorAdapters.add(visitor);
             return this;
         }
 
-        public Builder setShowMethods(boolean showMethods){
-            this.showMethods=showMethods;
+        public Builder setShowMethods(boolean showMethods) {
+            this.showMethods = showMethods;
             return this;
         }
 
-        public Builder setShowAttributes(boolean showAttributes){
-            this.showAttributes=showAttributes;
+        public Builder setShowAttributes(boolean showAttributes) {
+            this.showAttributes = showAttributes;
             return this;
         }
 
-        public Builder setShowColoredAccessSpecifiers(boolean showColoredAccessSpecifiers){
-            this.showColoredAccessSpecifiers=showColoredAccessSpecifiers;
+        public Builder setShowColoredAccessSpecifiers(boolean showColoredAccessSpecifiers) {
+            this.showColoredAccessSpecifiers = showColoredAccessSpecifiers;
             return this;
         }
 
         @Override
         public ClassDiagramConfig build() {
 
-            ClassDiagramConfig config=new ClassDiagramConfig();
+            ClassDiagramConfig config = new ClassDiagramConfig();
             config.setVisitorAdapters(visitorAdapters);
             config.setShowAttributes(showAttributes);
             config.setShowColoredAccessSpecifiers(showColoredAccessSpecifiers);
@@ -89,13 +89,9 @@ public class ClassDiagramConfig {
     }
 
     //default director for builder
-    public static class DefaultDirector{
-
-        public ClassDiagramConfig construct(){
+    public static class DefaultDirector {
+        public ClassDiagramConfig construct() {
             return new Builder().build();
         }
-
     }
-
-
 }
