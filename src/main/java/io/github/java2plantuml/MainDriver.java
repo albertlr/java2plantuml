@@ -1,3 +1,5 @@
+package io.github.java2plantuml;
+
 import source.DirectoryExplorer;
 import source.FileHandler;
 import translate.ClassDiagramConfig;
