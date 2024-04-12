@@ -16,6 +16,7 @@ public class FileHandler {
     void handle(File f) {
         System.out.println("File Found: " + f.getName());
 
+        @SuppressWarnings("PMD.UnusedLocalVariable")
         CompilationUnit cu = null;
         try {
             translator.translateFile(new File(f.getAbsolutePath()));

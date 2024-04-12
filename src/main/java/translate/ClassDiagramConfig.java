@@ -1,7 +1,6 @@
 package translate;
 
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class ClassDiagramConfig {
     }
 
     public List<VoidVisitorAdapter<Void>> getVisitorAdapters() {
-        return visitorAdapters;
+        return new ArrayList<>(visitorAdapters);
     }
 
     public void setVisitorAdapters(List<VoidVisitorAdapter<Void>> visitorAdapters) {

@@ -1,5 +1,6 @@
 package io.github.java2plantuml;
 
+import java.nio.charset.StandardCharsets;
 import source.DirectoryExplorer;
 import source.FileHandler;
 import translate.ClassDiagramConfig;
@@ -21,13 +22,13 @@ public class MainDriver {
         }
 
         for (int i = 0; i < args.length; ) {
-            switch (args[i]) {
-                default:
+//            switch (args[i]) {
+//                default:
                     System.out.println(args[i]);
                     sourcePath = args[i];
                     i++;
-                    break;
-            }
+//                    break;
+//            }
         }
 
         try {
@@ -54,7 +55,7 @@ public class MainDriver {
 
             File f = new File("output.puml");
             FileOutputStream fos = new FileOutputStream(f);
-            fos.write(umlTranslator.toPlantUml().getBytes());
+            fos.write(umlTranslator.toPlantUml().getBytes(StandardCharsets.UTF_8));
             fos.close();
             System.out.println("PlantUml syntax generated in output file.");
 
