@@ -6,7 +6,7 @@ This is a library which started from the CMPE202 course project [UML-Coder](http
 
   1. Use the following command to use the jar file.
      ```sh
-        java -jar java2plantuml.jar source
+        java -jar arget/java2plantuml-1.0-SNAPSHOT-jar-with-dependencies.jar source
      ```
      "source" can be path to file or a folder.
   2. File "ouput.puml" will be generated with plantuml syntax for class diagram.
