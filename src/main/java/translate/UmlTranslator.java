@@ -3,6 +3,7 @@ package translate;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.EnumConstantDeclaration;
@@ -22,6 +23,7 @@ public class UmlTranslator implements Translator {
     private Set<ClassOrInterfaceDeclaration> classSet;
     private Set<ClassOrInterfaceDeclaration> interfaceSet;
     private Set<EnumDeclaration> enumSet;
+    private Set<PackageDeclaration> packageSet;
     private Boolean error = false;
 
     private ClassDiagramConfig config = new ClassDiagramConfig.DefaultDirector().construct();
@@ -30,6 +32,7 @@ public class UmlTranslator implements Translator {
         classSet = new HashSet<>();
         interfaceSet = new HashSet<>();
         enumSet = new HashSet<>();
+        packageSet = new HashSet<>();
     }
 
     public void setConfig(ClassDiagramConfig config) {
@@ -56,6 +59,11 @@ public class UmlTranslator implements Translator {
     }
 
     @Override
+    public void addPackage(PackageDeclaration p) {
+        packageSet.add(p);
+    }
+
+    @Override
     public void addField(FieldDeclaration f) {
     }
 
@@ -76,7 +84,6 @@ public class UmlTranslator implements Translator {
             for (VoidVisitorAdapter<Void> visitor : config.getVisitorAdapters()) {
                 cu.accept(visitor, null);
             }
-
         } catch (Exception e) {
             setError(true);
             e.printStackTrace();
@@ -98,6 +105,8 @@ public class UmlTranslator implements Translator {
         if (!config.isShowColoredAccessSpecifiers()) {
             sb.append("skinparam classAttributeIconSize 0\n");
         }
+
+        writePackages(sb);
 
         writeClasses(sb);
         writeAssociations(sb);
@@ -139,11 +148,22 @@ public class UmlTranslator implements Translator {
         }
     }
 
+    private void writePackages(StringBuilder sb) {
+        for (PackageDeclaration p : packageSet) {
+            writePackage(p, sb);
+        }
+    }
 
     private void writeClasses(StringBuilder sb) {
         for (ClassOrInterfaceDeclaration c : classSet) {
             writeClass(c, sb);
         }
+    }
+
+    private void writePackage(PackageDeclaration p, StringBuilder sb) {
+        sb.append("package ").append(p.getName().asString()).append(" <<Rectangle>>").append(" {\n");
+        // FIXME: add classes from the package
+        sb.append('}');
     }
 
     private void writeClass(ClassOrInterfaceDeclaration c, StringBuilder sb) {

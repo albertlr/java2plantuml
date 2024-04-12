@@ -1,5 +1,6 @@
 package translate;
 
+import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.FieldDeclaration;
@@ -23,4 +24,5 @@ public interface Translator {
 
     void translateFile(File f) throws FileNotFoundException;
 
+    void addPackage(PackageDeclaration p);
 }
